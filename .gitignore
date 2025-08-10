@@ -1,0 +1,22 @@
+
+# General
+node_modules
+dist
+.DS_Store
+.env
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Uploads
+server/uploads/*
+!server/uploads/.gitkeep
+
+# Editor
+.vscode
+.idea
+
+# Build
+client/dist
+server/public

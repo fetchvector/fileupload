@@ -1,0 +1,29 @@
+
+services:
+  - type: web
+    name: file-upload-site
+    env: node
+    plan: free
+    autoDeploy: true
+    region: oregon
+    buildCommand: |
+      npm --prefix client ci
+      npm --prefix client run build
+      mkdir -p server/public
+      rm -rf server/public/*
+      cp -r client/dist/* server/public/
+      npm --prefix server ci
+    startCommand: npm --prefix server start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: UPLOAD_DIR
+        value: uploads
+      - key: MAX_FILE_SIZE
+        value: "104857600"
+    disks:
+      - name: uploads
+        mountPath: /app/server/uploads
+        sizeGB: 2
