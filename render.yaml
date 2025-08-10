@@ -7,12 +7,12 @@ services:
     autoDeploy: true
     region: oregon
     buildCommand: |
-      npm --prefix client ci
+      npm --prefix client install
       npm --prefix client run build
       mkdir -p server/public
       rm -rf server/public/*
       cp -r client/dist/* server/public/
-      npm --prefix server ci
+      npm --prefix server install
     startCommand: npm --prefix server start
     envVars:
       - key: NODE_ENV
